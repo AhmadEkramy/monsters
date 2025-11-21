@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Monsters Team Design System - Neon Green Theme */
+
+@layer base {
+  :root {
+    /* Base colors - Light mode */
+    --background: 0 0% 100%;
+    --foreground: 220 20% 10%;
+
+    /* Neon green primary color */
+    --primary: 112 87% 59%;
+    --primary-foreground: 220 20% 10%;
+    --primary-glow: 112 87% 69%;
+    
+    /* Secondary colors */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 220 20% 10%;
+
+    /* Muted colors */
+    --muted: 0 0% 96%;
+    --muted-foreground: 220 10% 46%;
+
+    /* Accent colors */
+    --accent: 112 87% 59%;
+    --accent-foreground: 220 20% 10%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Card */
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    /* Border & Input */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 112 87% 59%;
+
+    --radius: 0.75rem;
+
+    /* Custom glow effect */
+    --glow-sm: 0 0 10px hsl(var(--primary) / 0.5);
+    --glow-md: 0 0 20px hsl(var(--primary) / 0.6);
+    --glow-lg: 0 0 30px hsl(var(--primary) / 0.7);
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --background: 220 25% 8%;
+    --foreground: 0 0% 98%;
+
+    /* Neon green stays vibrant in dark mode */
+    --primary: 112 87% 59%;
+    --primary-foreground: 220 25% 8%;
+    --primary-glow: 112 87% 69%;
+
+    /* Secondary colors */
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Muted colors */
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 10% 65%;
+
+    /* Accent colors */
+    --accent: 112 87% 59%;
+    --accent-foreground: 220 25% 8%;
+
+    /* Destructive */
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Card */
+    --card: 220 23% 12%;
+    --card-foreground: 0 0% 98%;
+
+    /* Popover */
+    --popover: 220 23% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Border & Input */
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 112 87% 59%;
+
+    /* Enhanced glow in dark mode */
+    --glow-sm: 0 0 15px hsl(var(--primary) / 0.6);
+    --glow-md: 0 0 25px hsl(var(--primary) / 0.7);
+    --glow-lg: 0 0 40px hsl(var(--primary) / 0.8);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Neon glow effects */
+  .glow-sm {
+    filter: drop-shadow(var(--glow-sm));
+  }
+  
+  .glow-md {
+    filter: drop-shadow(var(--glow-md));
+  }
+  
+  .glow-lg {
+    filter: drop-shadow(var(--glow-lg));
+  }
+
+  /* Hover glow effect */
+  .hover-glow {
+    transition: filter 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    filter: drop-shadow(var(--glow-md));
+  }
+
+  /* Neon border glow */
+  .neon-border {
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5),
+                inset 0 0 10px hsl(var(--primary) / 0.2);
+  }
+
+  .neon-border-hover {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .neon-border-hover:hover {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.7),
+                inset 0 0 15px hsl(var(--primary) / 0.3);
+  }
+
+  /* Text glow */
+  .text-glow {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  }
+
+  .text-glow-lg {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.7),
+                 0 0 30px hsl(var(--primary) / 0.5);
+  }
+}
