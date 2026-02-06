@@ -107,7 +107,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full neon-border-hover"
-                  placeholder="John Doe"
+                  placeholder="Enter your name"
                 />
               </div>
 
@@ -123,7 +123,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full neon-border-hover"
-                  placeholder="john@example.com"
+                  placeholder="Enter your email"
                 />
               </div>
 

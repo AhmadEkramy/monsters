@@ -1,11 +1,25 @@
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Sparkles, Target, Users, Trophy } from 'lucide-react';
+import { Sparkles, Target, Users, Trophy, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCollection } from '@/hooks/useFirestore';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import * as React from "react";
 
 export default function Home() {
   const { t } = useLanguage();
+  const { data: slides, loading: slidesLoading } = useCollection('carousel');
+  const plugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true })
+  );
 
   const features = [
     {
@@ -25,16 +39,17 @@ export default function Home() {
     },
   ];
 
+  const carouselSlides = slides;
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(78,240,55,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(78,240,55,0.05),transparent_50%)]" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center space-y-8 animate-fade-in-up">
-            {/* Logo Placeholder with Animation */}
             <div className="flex justify-center">
               <div className="relative">
                 <div className="w-32 h-32 md:w-48 md:h-48 bg-primary/20 rounded-full flex items-center justify-center animate-float glow-lg">
@@ -44,7 +59,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Title */}
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl font-black text-foreground">
                 {t('heroTitle').split(' ').map((word, i) => (
@@ -61,16 +75,14 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Description */}
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               {t('heroDescription')}
             </p>
 
-            {/* CTA Button */}
             <div className="flex justify-center">
               <Link to="/contact">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-bold neon-border-hover transition-all duration-300"
                 >
                   {t('joinNow')}
@@ -81,14 +93,54 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Carousel Section */}
+      {!slidesLoading && carouselSlides.length > 0 && (
+        <section className="relative w-full bg-background overflow-hidden py-12">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <Carousel
+              plugins={[plugin.current]}
+              className="w-full max-w-5xl mx-auto"
+              onMouseEnter={plugin.current.stop}
+              onMouseLeave={plugin.current.reset}
+            >
+              <CarouselContent>
+                {carouselSlides.map((slide, index) => (
+                  <CarouselItem key={index}>
+                    <div className="p-1">
+                      <Card className="overflow-hidden border-none bg-background/50 backdrop-blur-sm group hover-glow">
+                        <div className="relative aspect-[21/9] w-full">
+                          <img
+                            src={slide.image}
+                            alt={slide.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                          <div className="absolute bottom-0 left-0 p-8 md:p-12 space-y-2">
+                            <h3 className="text-2xl md:text-4xl font-black text-foreground">{slide.title}</h3>
+                            <p className="text-lg text-muted-foreground max-w-xl">{slide.subtitle}</p>
+                          </div>
+                        </div>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex -left-12 hover:bg-primary hover:text-primary-foreground" />
+              <CarouselNext className="hidden md:flex -right-12 hover:bg-primary hover:text-primary-foreground" />
+            </Carousel>
+          </div>
+        </section>
+      )}
+
       {/* Features Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-muted/30 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(78,240,55,0.05),transparent_50%)]" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="p-6 bg-card hover:bg-card/80 border-border hover:border-primary/50 transition-all duration-300 hover-glow group"
+                className="p-6 bg-card/50 backdrop-blur-sm hover:bg-card/80 border-border hover:border-primary/50 transition-all duration-300 hover-glow group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="space-y-4">
@@ -115,7 +167,7 @@ export default function Home() {
               {t('joinDescription')}
             </p>
             <Link to="/contact">
-              <Button 
+              <Button
                 size="lg"
                 className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-bold neon-border-hover transition-all duration-300"
               >
