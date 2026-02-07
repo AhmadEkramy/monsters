@@ -1,25 +1,23 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Trophy, Award, Medal, Star, Loader2 } from 'lucide-react';
+import { Star, Loader2, Facebook, Instagram } from 'lucide-react';
 import { useCollection } from '@/hooks/useFirestore';
 
 export default function Competitions() {
   const { t } = useLanguage();
-  const { data: achievementsData, loading: achLoading, error: achError } = useCollection('achievements');
   const { data: competitionsData, loading: compLoading, error: compError } = useCollection('competitions');
 
-  if (achError || compError) {
+  if (compError) {
     return (
       <div className="min-h-screen pt-24 flex items-center justify-center text-destructive">
-        Error loading data: {(achError || compError)?.message}
+        Error loading data: {compError?.message}
       </div>
     );
   }
 
-  const achievements = achievementsData;
   const competitions = competitionsData;
-  const loading = achLoading || compLoading;
+  const loading = compLoading;
 
   return (
     <div className="min-h-screen pt-24 pb-12">
@@ -40,38 +38,6 @@ export default function Competitions() {
           </div>
         ) : (
           <>
-            {/* Achievements Section */}
-            <div className="mb-16">
-              <h2 className="text-3xl font-bold text-foreground mb-8 flex items-center">
-                <Trophy className="w-8 h-8 text-primary mr-3" />
-                {t('achievements')}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {achievements.map((achievement: any, index) => (
-                  <Card
-                    key={index}
-                    className="group p-6 bg-card border-border hover:border-primary/50 transition-all duration-300 hover-glow"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0">
-                        <Trophy className={`w-12 h-12 text-primary`} />
-                      </div>
-                      <div className="flex-1 space-y-2">
-                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                          {achievement.title}
-                        </h3>
-                        <p className="text-muted-foreground">{achievement.description}</p>
-                        <Badge variant="outline" className="text-primary border-primary">
-                          {achievement.date}
-                        </Badge>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
             {/* Competitions Section */}
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-8 flex items-center">
@@ -100,9 +66,33 @@ export default function Competitions() {
                       )}
                     </div>
                     <div className="p-6 space-y-3">
-                      <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                        {competition.title}
-                      </h3>
+                      <div className="flex justify-between items-start">
+                        <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                          {competition.title}
+                        </h3>
+                        <div className="flex gap-2">
+                          {competition.social?.facebook && (
+                            <a
+                              href={competition.social.facebook}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              <Facebook className="w-5 h-5" />
+                            </a>
+                          )}
+                          {competition.social?.instagram && (
+                            <a
+                              href={competition.social.instagram}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              <Instagram className="w-5 h-5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
                       <p className="text-muted-foreground">{competition.description}</p>
                     </div>
                   </Card>

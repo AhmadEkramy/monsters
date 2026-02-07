@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Calendar, MapPin, Camera, Loader2 } from 'lucide-react';
+import { Calendar, MapPin, Camera, Loader2, Facebook, Instagram } from 'lucide-react';
 import { useCollection } from '@/hooks/useFirestore';
 
 export default function Trips() {
@@ -61,9 +61,33 @@ export default function Trips() {
                   {/* Content */}
                   <div className="p-6 lg:p-8 flex flex-col justify-center space-y-6">
                     <div>
-                      <h3 className="text-3xl font-bold text-foreground group-hover:text-primary transition-colors duration-300 mb-4">
-                        {trip.title}
-                      </h3>
+                      <div className="flex justify-between items-start mb-4">
+                        <h3 className="text-3xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                          {trip.title}
+                        </h3>
+                        <div className="flex gap-2">
+                          {trip.social?.facebook && (
+                            <a
+                              href={trip.social.facebook}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              <Facebook className="w-5 h-5" />
+                            </a>
+                          )}
+                          {trip.social?.instagram && (
+                            <a
+                              href={trip.social.instagram}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              <Instagram className="w-5 h-5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
                       <p className="text-muted-foreground text-lg leading-relaxed">
                         {trip.description}
                       </p>

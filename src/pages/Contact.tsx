@@ -11,15 +11,19 @@ export default function Contact() {
   const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     message: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to a backend
-    toast.success('Message sent successfully! We\'ll get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    const whatsappNumber = "201552684664";
+    const message = `Name: ${formData.name}%0AMessage: ${formData.message}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+    window.open(whatsappUrl, '_blank');
+
+    toast.success('Redirecting to WhatsApp...');
+    setFormData({ name: '', message: '' });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -65,10 +69,10 @@ export default function Contact() {
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-2">{t('email')}</h3>
                   <a
-                    href="mailto:monsters@mnu.edu.eg"
+                    href="mailto:monsters.femnu@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    monsters@mnu.edu.eg
+                    monsters.femnu@gmail.com
                   </a>
                 </div>
               </div>
@@ -82,10 +86,10 @@ export default function Contact() {
                 <div>
                   <h3 className="text-lg font-bold text-foreground mb-2">Phone</h3>
                   <a
-                    href="tel:+201234567890"
+                    href="tel:+201552684664"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    +20 123 456 7890
+                    +20 15 52684664
                   </a>
                 </div>
               </div>
@@ -111,21 +115,7 @@ export default function Contact() {
                 />
               </div>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                  {t('email')}
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full neon-border-hover"
-                  placeholder="Enter your email"
-                />
-              </div>
+
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">

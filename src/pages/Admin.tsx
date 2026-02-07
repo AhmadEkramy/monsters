@@ -10,7 +10,6 @@ import { Textarea } from "@/components/ui/textarea";
 import {
     Users,
     Calendar,
-    Trophy,
     MapPin,
     Plus,
     Trash2,
@@ -19,7 +18,9 @@ import {
     X,
     Image as ImageIcon,
     CheckCircle2,
-    Star
+    Star,
+    Facebook,
+    Instagram
 } from 'lucide-react';
 import { useCollection } from '@/hooks/useFirestore';
 import { toast } from 'sonner';
@@ -53,7 +54,7 @@ export default function Admin() {
                                 <Calendar className="w-4 h-4 mr-2" /> Events
                             </TabsTrigger>
                             <TabsTrigger value="competitions" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-6">
-                                <Trophy className="w-4 h-4 mr-2" /> Achievements
+                                <Star className="w-4 h-4 mr-2" /> Competitions
                             </TabsTrigger>
                             <TabsTrigger value="trips" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-6">
                                 <MapPin className="w-4 h-4 mr-2" /> Trips
@@ -171,7 +172,8 @@ function EventsManager() {
     const { data: events, add, update, remove } = useCollection('events');
     const [isEditing, setIsEditing] = useState<string | null>(null);
     const [formData, setFormData] = useState<any>({
-        title: '', description: '', date: '', location: '', attendees: '', image: '', status: 'upcoming'
+        title: '', description: '', date: '', location: '', attendees: '', image: '', status: 'upcoming',
+        social: { facebook: '', instagram: '' }
     });
 
     const handleSave = async (e: React.FormEvent) => {
@@ -192,7 +194,10 @@ function EventsManager() {
 
     const resetForm = () => {
         setIsEditing(null);
-        setFormData({ title: '', description: '', date: '', location: '', attendees: '', image: '', status: 'upcoming' });
+        setFormData({
+            title: '', description: '', date: '', location: '', attendees: '', image: '', status: 'upcoming',
+            social: { facebook: '', instagram: '' }
+        });
     };
 
     return (
@@ -235,6 +240,24 @@ function EventsManager() {
                                 <option value="past">Past</option>
                             </select>
                         </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label>Facebook URL</Label>
+                                <Input
+                                    value={formData.social?.facebook || ''}
+                                    onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), facebook: e.target.value } })}
+                                    placeholder="https://facebook.com/..."
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label>Instagram URL</Label>
+                                <Input
+                                    value={formData.social?.instagram || ''}
+                                    onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), instagram: e.target.value } })}
+                                    placeholder="https://instagram.com/..."
+                                />
+                            </div>
+                        </div>
                         <div className="flex gap-2">
                             <Button type="submit" className="flex-1 bg-primary">{isEditing ? <Save className="w-4 h-4 mr-2" /> : <Plus className="w-4 h-4 mr-2" />}{isEditing ? 'Update' : 'Add'}</Button>
                             {isEditing && <Button type="button" variant="outline" onClick={resetForm}><X className="w-4 h-4" /></Button>}
@@ -270,26 +293,28 @@ function EventsManager() {
     );
 }
 
-// --- Competitions & Achievements Manager ---
+// --- Competitions Manager ---
 function CompetitionsManager() {
-    const { data: achievements, add: addAchie, update: updateAchie, remove: removeAchie } = useCollection('achievements');
     const { data: comps, add: addComp, update: updateComp, remove: removeComp } = useCollection('competitions');
 
     const [isEditing, setIsEditing] = useState<string | null>(null);
-    const [editType, setEditType] = useState<'achie' | 'comp'>('achie');
-    const [formData, setFormData] = useState<any>({ title: '', description: '', date: '', status: '', image: '' });
+    const [formData, setFormData] = useState<any>({
+        title: '',
+        description: '',
+        status: '',
+        image: '',
+        social: { facebook: '', instagram: '' }
+    });
 
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             if (isEditing) {
-                if (editType === 'achie') await updateAchie(isEditing, formData);
-                else await updateComp(isEditing, formData);
-                toast.success('Record updated');
+                await updateComp(isEditing, formData);
+                toast.success('Competition updated');
             } else {
-                if (editType === 'achie') await addAchie(formData);
-                else await addComp(formData);
-                toast.success('Record added');
+                await addComp(formData);
+                toast.success('Competition added');
             }
             resetForm();
         } catch (err: any) {
@@ -299,7 +324,13 @@ function CompetitionsManager() {
 
     const resetForm = () => {
         setIsEditing(null);
-        setFormData({ title: '', description: '', date: '', status: '', image: '' });
+        setFormData({
+            title: '',
+            description: '',
+            status: '',
+            image: '',
+            social: { facebook: '', instagram: '' }
+        });
     };
 
     return (
@@ -307,12 +338,8 @@ function CompetitionsManager() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <Card className="lg:col-span-1 border-border bg-card/50 backdrop-blur-sm self-start">
                     <CardHeader>
-                        <CardTitle>{isEditing ? 'Edit' : 'Add New'} {editType === 'achie' ? 'Achievement' : 'Competition'}</CardTitle>
-                        <CardDescription>Manage your records.</CardDescription>
-                        <div className="flex gap-2 mt-4">
-                            <Button size="sm" variant={editType === 'achie' ? 'default' : 'outline'} onClick={() => { setEditType('achie'); resetForm(); }}>Achievement</Button>
-                            <Button size="sm" variant={editType === 'comp' ? 'default' : 'outline'} onClick={() => { setEditType('comp'); resetForm(); }}>Competition</Button>
-                        </div>
+                        <CardTitle>{isEditing ? 'Edit' : 'Add New'} Competition</CardTitle>
+                        <CardDescription>Manage your competition records.</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSave} className="space-y-4">
@@ -321,23 +348,39 @@ function CompetitionsManager() {
                                 <Input value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} required />
                             </div>
                             <div className="space-y-2">
-                                <Label>{editType === 'achie' ? 'Year' : 'Status'}</Label>
+                                <Label>Status</Label>
                                 <Input
-                                    value={editType === 'achie' ? formData.date : formData.status}
-                                    onChange={e => setFormData({ ...formData, [editType === 'achie' ? 'date' : 'status']: e.target.value })}
-                                    placeholder={editType === 'achie' ? "2024" : "Semi-Finalist"}
+                                    value={formData.status}
+                                    onChange={e => setFormData({ ...formData, status: e.target.value })}
+                                    placeholder="Semi-Finalist"
                                     required
                                 />
                             </div>
-                            {editType === 'comp' && (
-                                <div className="space-y-2">
-                                    <Label>Image URL</Label>
-                                    <Input value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} />
-                                </div>
-                            )}
+                            <div className="space-y-2">
+                                <Label>Image URL</Label>
+                                <Input value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} placeholder="https://..." />
+                            </div>
                             <div className="space-y-2">
                                 <Label>Description</Label>
                                 <Textarea value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} required />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label>Facebook URL</Label>
+                                    <Input
+                                        value={formData.social?.facebook || ''}
+                                        onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), facebook: e.target.value } })}
+                                        placeholder="https://facebook.com/..."
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>Instagram URL</Label>
+                                    <Input
+                                        value={formData.social?.instagram || ''}
+                                        onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), instagram: e.target.value } })}
+                                        placeholder="https://instagram.com/..."
+                                    />
+                                </div>
                             </div>
                             <div className="flex gap-2">
                                 <Button type="submit" className="flex-1 bg-primary">{isEditing ? <Save className="w-4 h-4 mr-2" /> : <Plus className="w-4 h-4 mr-2" />}{isEditing ? 'Update' : 'Add'}</Button>
@@ -349,26 +392,6 @@ function CompetitionsManager() {
 
                 <div className="lg:col-span-2 space-y-8">
                     <div>
-                        <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><Trophy className="w-5 h-5 text-primary" /> Achievements</h3>
-                        <div className="space-y-3">
-                            {achievements.map((item: any) => (
-                                <Card key={item.id} className="border-border">
-                                    <div className="p-4 flex items-center gap-4">
-                                        <div className="flex-1">
-                                            <h4 className="font-bold">{item.title}</h4>
-                                            <p className="text-sm text-muted-foreground">{item.date} • {item.description}</p>
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <Button variant="ghost" size="icon" onClick={() => { setEditType('achie'); setIsEditing(item.id); setFormData(item); }}><Edit3 className="w-4 h-4" /></Button>
-                                            <Button variant="ghost" size="icon" className="text-destructive hover:bg-destructive/10" onClick={() => removeAchie(item.id)}><Trash2 className="w-4 h-4" /></Button>
-                                        </div>
-                                    </div>
-                                </Card>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div>
                         <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><Star className="w-5 h-5 text-primary" /> Competitions</h3>
                         <div className="space-y-3">
                             {comps.map((item: any) => (
@@ -379,7 +402,7 @@ function CompetitionsManager() {
                                             <p className="text-sm text-muted-foreground">{item.status} • {item.description}</p>
                                         </div>
                                         <div className="flex gap-2">
-                                            <Button variant="ghost" size="icon" onClick={() => { setEditType('comp'); setIsEditing(item.id); setFormData(item); }}><Edit3 className="w-4 h-4" /></Button>
+                                            <Button variant="ghost" size="icon" onClick={() => { setIsEditing(item.id); setFormData(item); }}><Edit3 className="w-4 h-4" /></Button>
                                             <Button variant="ghost" size="icon" className="text-destructive hover:bg-destructive/10" onClick={() => removeComp(item.id)}><Trash2 className="w-4 h-4" /></Button>
                                         </div>
                                     </div>
@@ -398,7 +421,8 @@ function TripsManager() {
     const { data: trips, add, update, remove } = useCollection('trips');
     const [isEditing, setIsEditing] = useState<string | null>(null);
     const [formData, setFormData] = useState<any>({
-        title: '', description: '', date: '', location: '', images: []
+        title: '', description: '', date: '', location: '', images: [],
+        social: { facebook: '', instagram: '' }
     });
     const [imageUrl, setImageUrl] = useState('');
 
@@ -433,7 +457,10 @@ function TripsManager() {
 
     const resetForm = () => {
         setIsEditing(null);
-        setFormData({ title: '', description: '', date: '', location: '', images: [] });
+        setFormData({
+            title: '', description: '', date: '', location: '', images: [],
+            social: { facebook: '', instagram: '' }
+        });
     };
 
     return (
@@ -474,6 +501,24 @@ function TripsManager() {
                                         <button type="button" onClick={() => removeImage(i)} className="absolute -top-1 -right-1 bg-destructive text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px]"><X /></button>
                                     </div>
                                 ))}
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label>Facebook URL</Label>
+                                <Input
+                                    value={formData.social?.facebook || ''}
+                                    onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), facebook: e.target.value } })}
+                                    placeholder="https://facebook.com/..."
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label>Instagram URL</Label>
+                                <Input
+                                    value={formData.social?.instagram || ''}
+                                    onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), instagram: e.target.value } })}
+                                    placeholder="https://instagram.com/..."
+                                />
                             </div>
                         </div>
                         <div className="flex gap-2">

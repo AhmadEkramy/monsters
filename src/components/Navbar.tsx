@@ -45,8 +45,9 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 hover-glow">
-            <div className="text-2xl font-black text-primary text-glow">
+          <Link to="/" className="flex items-center space-x-3 hover-glow group">
+            <img src="/logo.png" alt="Monsters Logo" className="h-10 w-auto transition-transform duration-300 group-hover:scale-110" />
+            <div className="text-2xl font-black text-primary text-glow tracking-tighter">
               MONSTERS
             </div>
           </Link>

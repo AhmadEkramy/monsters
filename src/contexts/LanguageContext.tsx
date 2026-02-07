@@ -21,7 +21,7 @@ const translations = {
     // Hero Section
     heroTitle: 'Welcome to Monsters Team',
     heroSubtitle: 'Mansoura National University',
-    heroDescription: 'We are a dynamic team of innovators, creators, and problem-solvers dedicated to excellence in technology, competition, and community. Join us in our journey to achieve greatness and make a lasting impact.',
+    heroDescription: 'Who are we? We are the entertainment pulse of the Faculty of Engineering at Mansoura National University. We established monsters with one goal: To shift the perspective. We aim to show the other side of engineering—the fun, social, and creative side. Through our events and activities, we break the routine and prove that engineering life is full of energy and excitement.',
     joinNow: 'Join Monsters Now',
 
     // About
@@ -148,7 +148,7 @@ const translations = {
     // Hero Section
     heroTitle: 'مرحباً بكم في فريق مونسترز',
     heroSubtitle: 'جامعة المنصورة الأهلية',
-    heroDescription: 'نحن فريق ديناميكي من المبتكرين والمبدعين وحلالي المشكلات المكرسين للتميز في التكنولوجيا والمنافسة والمجتمع. انضم إلينا في رحلتنا لتحقيق العظمة وإحداث تأثير دائم.',
+    heroDescription: 'من نحن؟ نحن نبض الترفيه في كلية الهندسة بجامعة المنصورة الأهلية. لقد أنشأنا مونسترز بهدف واحد: تغيير المنظور. نحن نهدف إلى إظهار الجانب الآخر للهندسة - الجانب الممتع والاجتماعي والإبداعي. من خلال فعالياتنا وأنشطتنا، نكسر الروتين ونثبت أن حياة الهندسة مليئة بالطاقة والإثارة.',
     joinNow: 'انضم الآن',
 
     // About
