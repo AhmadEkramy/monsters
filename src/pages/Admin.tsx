@@ -134,9 +134,28 @@ function TeamManager() {
                             <Label>Image URL</Label>
                             <Input value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} placeholder="https://..." />
                         </div>
-                        <div className="space-y-2">
-                            <Label>LinkedIn</Label>
-                            <Input value={formData.social.linkedin} onChange={e => setFormData({ ...formData, social: { ...formData.social, linkedin: e.target.value } })} />
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label>Reports To (Parent)</Label>
+                                <select
+                                    className="w-full bg-background border border-input rounded-md p-2"
+                                    value={formData.parentId || ''}
+                                    onChange={e => setFormData({ ...formData, parentId: e.target.value || null })}
+                                >
+                                    <option value="">Root (No Parent)</option>
+                                    {team.filter((m: any) => m.id !== isEditing).map((member: any) => (
+                                        <option key={member.id} value={member.id}>{member.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="space-y-2">
+                                <Label>Display Order</Label>
+                                <Input
+                                    type="number"
+                                    value={formData.order || 0}
+                                    onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                                />
+                            </div>
                         </div>
                         <div className="flex gap-2">
                             <Button type="submit" className="flex-1 bg-primary">{isEditing ? <Save className="w-4 h-4 mr-2" /> : <Plus className="w-4 h-4 mr-2" />}{isEditing ? 'Update' : 'Add'}</Button>

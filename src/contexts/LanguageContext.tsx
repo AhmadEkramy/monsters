@@ -35,8 +35,8 @@ const translations = {
     joinButton: 'Apply Now',
 
     // Team
-    teamTitle: 'Meet Our Team',
-    teamDescription: 'The talented individuals behind Monsters',
+    teamTitle: 'Our Board',
+    teamDescription: '',
 
     // Events
     eventsTitle: 'Our Events',
@@ -171,8 +171,8 @@ const translations = {
     joinButton: 'قدم الآن',
 
     // Team
-    teamTitle: 'تعرف على فريقنا',
-    teamDescription: 'الأفراد الموهوبون وراء مونسترز',
+    teamTitle: 'مجلس الإدارة',
+    teamDescription: '',
 
     // Events
     eventsTitle: 'فعالياتنا',
