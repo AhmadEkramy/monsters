@@ -17,7 +17,9 @@ import Contact from "./pages/Contact";
 import Committees from "./pages/Committees";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -44,7 +46,9 @@ const App = () => (
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/admin" element={<Admin />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile/:userId" element={<UserProfile />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>

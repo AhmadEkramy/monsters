@@ -8,10 +8,11 @@ export function Footer() {
     { icon: Facebook, href: 'https://www.facebook.com/share/1C1jzpXb3L/', label: 'Facebook' },
     { icon: Instagram, href: 'https://www.instagram.com/monsters_mnu?igsh=aW5kMDA3eXF6N3hy', label: 'Instagram' },
     { icon: TikTok, href: 'https://www.tiktok.com/@monsters.mnu?_r=1&_t=ZS-93j4s2or7Y4', label: 'TikTok' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/monsters-femnu-2184563aa?utm_source=share_via&utm_content=profile&utm_medium=member_android', label: 'LinkedIn' },
   ];
 
   const creatorSocials = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
+    { icon: Facebook, href: 'https://www.facebook.com/share/1GTFnmsQji/', label: 'Facebook' },
     { icon: Instagram, href: 'https://www.instagram.com/mustafa_ekramy1?igsh=OWJrbTc2ZjY1NnY4', label: 'Instagram' },
     { icon: Github, href: '#', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/mustafa-ekramy-47885537a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', label: 'LinkedIn' },

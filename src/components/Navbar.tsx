@@ -102,6 +102,12 @@ export function Navbar() {
                     {user.displayName || user.email}
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
+                  <Link to="/dashboard">
+                    <DropdownMenuItem className="cursor-pointer font-bold text-primary">
+                      <LayoutDashboard className="mr-2 h-4 w-4" />
+                      <span>{t('dashboard')}</span>
+                    </DropdownMenuItem>
+                  </Link>
                   <Link to="/profile">
                     <DropdownMenuItem className="cursor-pointer">
                       <User className="mr-2 h-4 w-4" />
@@ -186,6 +192,14 @@ export function Navbar() {
             <div className="pt-2 border-t border-border mt-2 space-y-1">
               {user ? (
                 <>
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center px-4 py-3 rounded-lg text-sm font-bold text-primary bg-primary/5 hover:bg-primary/10 transition-all duration-300"
+                  >
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    {t('dashboard')}
+                  </Link>
                   <Link
                     to="/profile"
                     onClick={() => setIsOpen(false)}

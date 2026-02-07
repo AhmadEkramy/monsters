@@ -134,6 +134,15 @@ const translations = {
     updateSuccess: 'Profile updated successfully!',
     role: 'Role',
     memberSince: 'Member Since',
+    dashboard: 'Dashboard',
+    userDashboard: 'User Dashboard',
+    welcomeBack: 'Welcome back',
+    overview: 'Overview',
+    recentActivity: 'Recent Activity',
+    quickStats: 'Quick Stats',
+    joinedEvents: 'Joined Events',
+    points: 'Points',
+    totalCompetitions: 'Total Competitions',
   },
   ar: {
     // Navigation
@@ -260,6 +269,15 @@ const translations = {
     updateSuccess: 'تم تحديث الملف الشخصي بنجاح!',
     role: 'الرتبة',
     memberSince: 'عضو منذ',
+    dashboard: 'لوحة التحكم',
+    userDashboard: 'لوحة تحكم العضو',
+    welcomeBack: 'مرحباً بعودتك',
+    overview: 'نظرة عامة',
+    recentActivity: 'النشاط الأخير',
+    quickStats: 'إحصائيات سريعة',
+    joinedEvents: 'الفعاليات المنضم إليها',
+    points: 'النقاط',
+    totalCompetitions: 'إجمالي المسابقات',
   },
 };
 
