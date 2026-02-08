@@ -15,6 +15,7 @@ import Competitions from "./pages/Competitions";
 import Trips from "./pages/Trips";
 import Contact from "./pages/Contact";
 import Committees from "./pages/Committees";
+import Members from "./pages/Members";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
@@ -43,6 +44,7 @@ const App = () => (
                     <Route path="/events" element={<Events />} />
                     <Route path="/competitions" element={<Competitions />} />
                     <Route path="/trips" element={<Trips />} />
+                    <Route path="/members" element={<Members />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/admin" element={<Admin />} />

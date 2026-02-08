@@ -30,6 +30,7 @@ export function Navbar() {
     { path: '/events', label: t('events') },
     { path: '/competitions', label: t('competitions') },
     { path: '/trips', label: t('trips') },
+    { path: '/members', label: t('members') },
     { path: '/contact', label: t('contact') },
   ];
 

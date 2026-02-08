@@ -12,11 +12,13 @@ const translations = {
   en: {
     // Navigation
     home: 'Home',
+    all: 'All',
     ourTeam: 'Our Team',
     events: 'Events',
     competitions: 'Competitions',
     trips: 'Trips',
     contact: 'Contact',
+    members: 'Members',
 
     // Hero Section
     heroTitle: 'Welcome to Monsters Team',
@@ -143,16 +145,20 @@ const translations = {
     joinedEvents: 'Joined Events',
     points: 'Points',
     totalCompetitions: 'Total Competitions',
+    membersTitle: 'Our Members',
+    membersDescription: 'Meet the amazing students who make Monsters what it is.',
   },
   ar: {
     // Navigation
     home: 'الصفحة الرئيسية',
+    all: 'الكل',
     ourTeam: 'فريقنا',
     events: 'الفعاليات',
     competitions: 'المسابقات',
     trips: 'الرحلات',
     contact: 'تواصل معنا',
     committees: 'اللجان',
+    members: 'الأعضاء',
 
     // Hero Section
     heroTitle: 'مرحباً بكم في فريق مونسترز',
@@ -278,6 +284,8 @@ const translations = {
     joinedEvents: 'الفعاليات المنضم إليها',
     points: 'النقاط',
     totalCompetitions: 'إجمالي المسابقات',
+    membersTitle: 'أعضاؤنا',
+    membersDescription: 'تعرف على الطلاب الرائعين الذين يجعلون فريق مونسترز ما هو عليه.',
   },
 };
 

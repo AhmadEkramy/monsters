@@ -59,6 +59,9 @@ export default function Admin() {
                             <TabsTrigger value="trips" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-6">
                                 <MapPin className="w-4 h-4 mr-2" /> Trips
                             </TabsTrigger>
+                            <TabsTrigger value="members" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-6">
+                                <Users className="w-4 h-4 mr-2" /> Members
+                            </TabsTrigger>
                             <TabsTrigger value="carousel" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground py-2 px-6">
                                 <ImageIcon className="w-4 h-4 mr-2" /> Carousel
                             </TabsTrigger>
@@ -76,6 +79,9 @@ export default function Admin() {
                     </TabsContent>
                     <TabsContent value="trips">
                         <TripsManager />
+                    </TabsContent>
+                    <TabsContent value="members">
+                        <MembersManager />
                     </TabsContent>
                     <TabsContent value="carousel">
                         <CarouselManager />
@@ -644,6 +650,100 @@ function CarouselManager() {
                                 <Button variant="ghost" size="icon" className="text-destructive hover:bg-destructive/10" onClick={() => remove(slide.id)}><Trash2 className="w-4 h-4" /></Button>
                             </div>
                         </div>
+                    </Card>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// --- Members Manager ---
+function MembersManager() {
+    const { data: members, add, update, remove } = useCollection('members');
+    const [isEditing, setIsEditing] = useState<string | null>(null);
+    const [formData, setFormData] = useState<any>({ name: '', committee: 'hr', image: '' });
+
+    const handleSave = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            if (isEditing) {
+                await update(isEditing, formData);
+                toast.success('Member updated');
+            } else {
+                await add(formData);
+                toast.success('Member added');
+            }
+            resetForm();
+        } catch (err: any) {
+            toast.error(err.message);
+        }
+    };
+
+    const resetForm = () => {
+        setIsEditing(null);
+        setFormData({ name: '', committee: 'hr', image: '' });
+    };
+
+    const committees = [
+        { id: 'hr', label: 'HR' },
+        { id: 'pr', label: 'PR' },
+        { id: 'creativity', label: 'Creativity' },
+        { id: 'organization', label: 'Organization' },
+        { id: 'media', label: 'Media' },
+        { id: 'activity', label: 'Activity' },
+    ];
+
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <Card className="lg:col-span-1 border-border bg-card/50 backdrop-blur-sm self-start">
+                <CardHeader>
+                    <CardTitle>{isEditing ? 'Edit Member' : 'Add New Member'}</CardTitle>
+                    <CardDescription>Enter regular member details below.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSave} className="space-y-4">
+                        <div className="space-y-2">
+                            <Label>Name</Label>
+                            <Input value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} required />
+                        </div>
+                        <div className="space-y-2">
+                            <Label>Committee</Label>
+                            <select
+                                className="w-full bg-background border border-input rounded-md p-2"
+                                value={formData.committee}
+                                onChange={e => setFormData({ ...formData, committee: e.target.value })}
+                            >
+                                {committees.map(c => (
+                                    <option key={c.id} value={c.id}>{c.label}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="space-y-2">
+                            <Label>Image URL</Label>
+                            <Input value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} placeholder="https://..." />
+                        </div>
+                        <div className="flex gap-2">
+                            <Button type="submit" className="flex-1 bg-primary">{isEditing ? <Save className="w-4 h-4 mr-2" /> : <Plus className="w-4 h-4 mr-2" />}{isEditing ? 'Update' : 'Add'}</Button>
+                            {isEditing && <Button type="button" variant="outline" onClick={resetForm}><X className="w-4 h-4" /></Button>}
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+
+            <div className="lg:col-span-2 space-y-4">
+                {members.map((member: any) => (
+                    <Card key={member.id} className="border-border hover:border-primary/30 transition-all">
+                        <CardContent className="p-4 flex items-center gap-4">
+                            <img src={member.image || 'https://via.placeholder.com/150'} alt={member.name} className="w-12 h-12 rounded-full object-cover" />
+                            <div className="flex-1">
+                                <h4 className="font-bold">{member.name}</h4>
+                                <p className="text-sm text-muted-foreground uppercase tracking-widest text-[10px] font-black">{member.committee}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <Button variant="ghost" size="icon" onClick={() => { setIsEditing(member.id); setFormData(member); }}><Edit3 className="w-4 h-4" /></Button>
+                                <Button variant="ghost" size="icon" className="text-destructive hover:bg-destructive/10" onClick={() => remove(member.id)}><Trash2 className="w-4 h-4" /></Button>
+                            </div>
+                        </CardContent>
                     </Card>
                 ))}
             </div>
