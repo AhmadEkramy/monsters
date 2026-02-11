@@ -95,67 +95,73 @@ function TreeNode({ member, isRoot = false }: { member: any; isRoot?: boolean })
   return (
     <div className="flex flex-col items-center relative w-full">
       {/* Member Card */}
-      <div className="relative group z-10 transition-transform duration-300 w-full max-w-[300px] md:max-w-xs">
+      <div className="relative group z-10 transition-transform duration-300 w-[280px] sm:w-[320px]">
         <div className={cn(
-          "p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-card border-2 border-border hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20",
-          "flex flex-col items-center text-center animate-fade-in relative"
+          "h-[450px] rounded-[2.5rem] bg-card border-2 border-border hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20",
+          "flex flex-col animate-fade-in relative overflow-hidden"
         )}>
           {/* Top Connecting Line (Not for roots) */}
           {!isRoot && (
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-0.5 h-8 bg-primary/30 hidden md:block" />
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-0.5 h-12 bg-primary/50 hidden md:block" />
           )}
 
-          {/* Image */}
-          <div className="relative w-24 h-24 md:w-32 md:h-32 mb-4 md:mb-6">
-            <div className="absolute inset-0 bg-primary/20 rounded-[1.5rem] md:rounded-[2rem] blur-xl group-hover:blur-2xl transition-all opacity-50" />
+          {/* Image - Full Width Top Half */}
+          <div className="relative h-[65%] w-full overflow-hidden">
+            <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/5 transition-colors duration-500" />
             <img
-              src={member.image || 'https://via.placeholder.com/150'}
+              src={member.image || 'https://via.placeholder.com/400'}
               alt={member.name}
-              className="relative w-full h-full object-cover rounded-[1.5rem] md:rounded-[2rem] border-2 border-primary/20 shadow-xl"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
           </div>
 
-          <h3 className="font-black text-lg md:text-xl text-foreground mb-1 group-hover:text-primary transition-colors">
-            {member.name}
-          </h3>
-          <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-primary/70 mb-4 md:mb-6">
-            {member.position}
-          </p>
+          {/* Content - Bottom Part */}
+          <div className="flex-1 p-6 flex flex-col items-center text-center justify-between">
+            <div className="space-y-1">
+              <h3 className="font-black text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors line-clamp-1">
+                {member.name}
+              </h3>
+              <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-primary/70">
+                {member.position}
+              </p>
+            </div>
 
-          {/* Socials */}
-          <div className="flex gap-3 justify-center">
-            {member.social?.linkedin && (
-              <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
-                <Linkedin className="w-4 h-4" />
-              </a>
-            )}
-            {member.social?.github && (
-              <a href={member.social.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
-                <Github className="w-4 h-4" />
-              </a>
-            )}
-            {member.social?.facebook && (
-              <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
-                <Facebook className="w-4 h-4" />
-              </a>
-            )}
-            {member.social?.instagram && (
-              <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
-                <Instagram className="w-4 h-4" />
-              </a>
-            )}
+            {/* Socials */}
+            <div className="flex gap-4 justify-center">
+              {member.social?.linkedin && (
+                <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              )}
+              {member.social?.github && (
+                <a href={member.social.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
+                  <Github className="w-5 h-5" />
+                </a>
+              )}
+              {member.social?.facebook && (
+                <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
+              {member.social?.instagram && (
+                <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Children Container */}
       {hasChildren && (
-        <div className="relative flex flex-col md:flex-row gap-12 md:gap-8 pt-12 w-full items-center md:items-start justify-center">
+        <div className="relative flex flex-col md:flex-row gap-16 md:gap-12 pt-24 w-full items-center md:items-start justify-center">
           {/* Connection Lines (Desktop Only) */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-12 bg-primary/30 hidden md:block" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-12 bg-primary/50 hidden md:block" />
 
           {member.children.length > 1 && (
-            <div className="absolute top-12 left-[15%] right-[15%] h-0.5 bg-primary/30 hidden md:block" />
+            <div className="absolute top-12 left-[10%] right-[10%] h-0.5 bg-primary/50 hidden md:block" />
           )}
 
           {/* Mobile Vertical Line */}

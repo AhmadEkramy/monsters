@@ -46,13 +46,13 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 hover-glow group">
-            <img src="/logo.png" alt="Monsters Logo" className="h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
-            <img src="/logo1.png" alt="University Logo" className="h-12 w-auto transition-transform duration-300 group-hover:scale-110" />
-            <img src="/logo2.png" alt="College Logo" className="h-12 w-auto transition-transform duration-300 group-hover:scale-110" />
-            <div className="text-2xl font-black text-primary text-glow tracking-tighter">
+          <Link to="/" className="flex items-center space-x-1 sm:space-x-2 group shrink-0">
+            <img src="/logo.png" alt="Monsters Logo" className="h-8 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-110" />
+            <div className="text-xl sm:text-2xl font-black text-primary text-glow tracking-tighter hidden md:block ml-2">
               MONSTERS
             </div>
+            <img src="/logo1.png" alt="University Logo" className="h-7 sm:h-10 w-auto transition-transform duration-300 group-hover:scale-110" />
+            <img src="/logo2.png" alt="College Logo" className="h-7 sm:h-10 w-auto transition-transform duration-300 group-hover:scale-110" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -79,7 +79,6 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="hover-glow"
             >
               {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
             </Button>
@@ -87,7 +86,6 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               onClick={toggleLanguage}
-              className="hover-glow"
             >
               <Languages className="h-5 w-5" />
               <span className="ml-1 text-xs">{language === 'en' ? 'AR' : 'EN'}</span>
@@ -96,7 +94,7 @@ export function Navbar() {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="hover-glow rounded-full">
+                  <Button variant="ghost" size="icon" className="rounded-full">
                     <User className="h-5 w-5" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -149,7 +147,6 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="hover-glow"
             >
               {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
             </Button>
@@ -157,7 +154,6 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               onClick={toggleLanguage}
-              className="hover-glow"
             >
               <Languages className="h-5 w-5" />
             </Button>
@@ -165,7 +161,6 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="hover-glow"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>

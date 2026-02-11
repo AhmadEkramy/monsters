@@ -57,7 +57,7 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 px-4">
+        <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 px-4 pt-32 pb-12">
             {/* Background Decorations */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(78,240,55,0.1),transparent_50%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(78,240,55,0.05),transparent_50%)]" />
@@ -66,8 +66,8 @@ export default function Login() {
                 {/* Logo Section */}
                 <div className="text-center mb-8 space-y-2">
                     <div className="flex justify-center mb-4">
-                        <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center animate-float glow-sm">
-                            <Sparkles className="w-8 h-8 text-primary" />
+                        <div className="w-24 h-24 bg-primary/10 rounded-2xl flex items-center justify-center animate-float p-4 shadow-xl shadow-primary/10">
+                            <img src="/logo.png" alt="Monsters Logo" className="w-full h-auto drop-shadow-glow" />
                         </div>
                     </div>
                     <h1 className="text-3xl font-black text-foreground tracking-tight">
