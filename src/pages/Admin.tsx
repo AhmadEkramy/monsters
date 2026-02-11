@@ -96,7 +96,7 @@ export default function Admin() {
 function TeamManager() {
     const { data: team, add, update, remove } = useCollection('team');
     const [isEditing, setIsEditing] = useState<string | null>(null);
-    const [formData, setFormData] = useState<any>({ name: '', position: '', image: '', social: { facebook: '', twitter: '', linkedin: '', github: '' } });
+    const [formData, setFormData] = useState<any>({ name: '', position: '', image: '', social: { facebook: '', instagram: '', linkedin: '' } });
 
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -116,7 +116,7 @@ function TeamManager() {
 
     const resetForm = () => {
         setIsEditing(null);
-        setFormData({ name: '', position: '', image: '', social: { facebook: '', twitter: '', linkedin: '', github: '' } });
+        setFormData({ name: '', position: '', image: '', social: { facebook: '', instagram: '', linkedin: '' } });
     };
 
     return (
@@ -160,6 +160,26 @@ function TeamManager() {
                                     type="number"
                                     value={formData.order || 0}
                                     onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                                />
+                            </div>
+                        </div>
+                        <div className="space-y-2">
+                            <Label>Social Links (Optional)</Label>
+                            <div className="grid grid-cols-1 gap-2">
+                                <Input
+                                    value={formData.social?.facebook || ''}
+                                    onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), facebook: e.target.value } })}
+                                    placeholder="Facebook URL"
+                                />
+                                <Input
+                                    value={formData.social?.instagram || ''}
+                                    onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), instagram: e.target.value } })}
+                                    placeholder="Instagram URL"
+                                />
+                                <Input
+                                    value={formData.social?.linkedin || ''}
+                                    onChange={e => setFormData({ ...formData, social: { ...(formData.social || {}), linkedin: e.target.value } })}
+                                    placeholder="LinkedIn URL"
                                 />
                             </div>
                         </div>

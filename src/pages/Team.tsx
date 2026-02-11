@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCollection } from '@/hooks/useFirestore';
-import { Loader2, Facebook, Twitter, Linkedin, Github } from 'lucide-react';
+import { Loader2, Facebook, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface TeamMember {
@@ -15,6 +15,7 @@ interface TeamMember {
     twitter?: string;
     linkedin?: string;
     github?: string;
+    instagram?: string;
   };
 }
 
@@ -136,6 +137,11 @@ function TreeNode({ member, isRoot = false }: { member: any; isRoot?: boolean })
             {member.social?.facebook && (
               <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
                 <Facebook className="w-4 h-4" />
+              </a>
+            )}
+            {member.social?.instagram && (
+              <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-all hover:scale-110">
+                <Instagram className="w-4 h-4" />
               </a>
             )}
           </div>

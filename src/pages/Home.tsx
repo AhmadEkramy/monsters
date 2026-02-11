@@ -84,14 +84,14 @@ export default function Home() {
             </p>
 
             <div className="flex justify-center">
-              <Link to="/contact">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSds0DCZCBLYHqy16qizGnXHbZPYq1p4NGqNgabFiUwFTZxTow/viewform" target="_blank" rel="noopener noreferrer">
                 <Button
                   size="lg"
                   className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-bold neon-border-hover transition-all duration-300"
                 >
                   {t('joinNow')}
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -172,14 +172,14 @@ export default function Home() {
             <p className="text-xl text-muted-foreground">
               {t('joinDescription')}
             </p>
-            <Link to="/contact">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSds0DCZCBLYHqy16qizGnXHbZPYq1p4NGqNgabFiUwFTZxTow/viewform" target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-bold neon-border-hover transition-all duration-300"
               >
                 {t('joinButton')}
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
