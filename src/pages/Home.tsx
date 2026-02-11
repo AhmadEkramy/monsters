@@ -26,16 +26,19 @@ export default function Home() {
       icon: Target,
       title: t('ourVision'),
       description: t('visionText'),
+      link: '/committees'
     },
     {
       icon: Users,
       title: t('ourTeam'),
       description: 'A diverse group of talented individuals working together.',
+      link: '/team'
     },
     {
       icon: Trophy,
       title: t('achievements'),
       description: 'Proven track record in competitions and events.',
+      link: '/events'
     },
   ];
 
@@ -144,19 +147,20 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card
-                key={index}
-                className="p-6 bg-card/50 backdrop-blur-sm hover:bg-card/80 border-border hover:border-primary/50 transition-all duration-300 hover-glow group"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="space-y-4">
-                  <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                    <feature.icon className="w-7 h-7 text-primary" />
+              <Link key={index} to={feature.link} className="block transition-transform duration-300 hover:scale-[1.02]">
+                <Card
+                  className="p-6 bg-card/50 backdrop-blur-sm hover:bg-card/80 border-border hover:border-primary/50 transition-all duration-300 hover-glow group cursor-pointer h-full"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="space-y-4">
+                    <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                      <feature.icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground">{feature.title}</h3>
+                    <p className="text-muted-foreground">{feature.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              </Card>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
