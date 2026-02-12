@@ -71,7 +71,7 @@ export default function Home() {
                 {t('heroTitle').split(' ').map((word, i) => (
                   <span
                     key={i}
-                    className={i === t('heroTitle').split(' ').length - 1 ? 'text-primary text-glow-lg' : ''}
+                    className={i >= t('heroTitle').split(' ').length - 2 ? 'text-primary text-glow-lg' : ''}
                   >
                     {word}{' '}
                   </span>

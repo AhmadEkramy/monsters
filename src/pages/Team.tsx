@@ -106,7 +106,7 @@ function TreeNode({ member, isRoot = false }: { member: any; isRoot?: boolean })
           )}
 
           {/* Image - Full Width Top Half */}
-          <div className="relative h-[65%] w-full overflow-hidden">
+          <div className="relative h-[60%] w-full overflow-hidden">
             <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/5 transition-colors duration-500" />
             <img
               src={member.image || 'https://via.placeholder.com/400'}
@@ -119,7 +119,7 @@ function TreeNode({ member, isRoot = false }: { member: any; isRoot?: boolean })
           {/* Content - Bottom Part */}
           <div className="flex-1 p-6 flex flex-col items-center text-center justify-between">
             <div className="space-y-1">
-              <h3 className="font-black text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors line-clamp-1">
+              <h3 className="font-black text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors">
                 {member.name}
               </h3>
               <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-primary/70">
