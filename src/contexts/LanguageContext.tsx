@@ -13,7 +13,7 @@ const translations = {
     // Navigation
     home: 'Home',
     all: 'All',
-    ourTeam: 'Our Team',
+    ourTeam: 'Our Board',
     events: 'Events',
     competitions: 'Competitions',
     trips: 'Trips',
@@ -152,7 +152,7 @@ const translations = {
     // Navigation
     home: 'الصفحة الرئيسية',
     all: 'الكل',
-    ourTeam: 'فريقنا',
+    ourTeam: 'مجلس الإدارة',
     events: 'الفعاليات',
     competitions: 'المسابقات',
     trips: 'الرحلات',
